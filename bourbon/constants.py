@@ -1,0 +1,2 @@
+DIRECTORY = 0
+FILE      = 1
