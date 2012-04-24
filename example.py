@@ -25,6 +25,11 @@ class Post(bourbon.ModelInterface):
            self.post = PostModel()
         return self
 
+    @staticmethod
+    def stat(identifier):
+        post = Post.open(identifier)
+        return bourbon.Stat.as_file(len(post.read())).as_dict()
+
     def close(self):
         self.sess.add(self.post)
         self.sess.commit()
