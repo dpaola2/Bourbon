@@ -14,6 +14,9 @@ install:
 serve:
 	$(ACTIVATE) && $(ENV) foreman start -p 5000
 
+shell:
+	$(ACTIVATE) && $(ENV) ipython
+
 deploy:
 	git push heroku master
 

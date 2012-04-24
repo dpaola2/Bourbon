@@ -8,20 +8,36 @@ filesystem.
 
 """
 import bourbon
+from models import Post as PostModel, Session
 
-class Post(bourbon.Model):
+class Post(bourbon.ModelInterface):
+    @staticmethod
+    def all():
+        sess = Session()
+        return [post.id for post in sess.query(PostModel).all()]
+    
+    @staticmethod
+    def open(identifier):
+        self = Post()
+        self.sess = Session()
+        self.post = self.sess.query(PostModel).filter_by(id=identifier).scalar()
+        if self.post is None:
+           self.post = PostModel()
+        return self
+
+    def close(self):
+        self.sess.add(self.post)
+        self.sess.commit()
+        del self.sess
+        del self.post
+        return True
+    
     def read(self):
-        return self.data
+        return self.post.text
 
     def write(self, data):
-        self.data = data
-        self._save()
-        return self.data
-
+        self.post.text = data
+        
     def getattr(self):
         return bourbon.FILE
 
-routes = (
-    ('/', bourbon.Namespace(None)),
-    ('/posts', bourbon.Namespace(Post)),
-)
