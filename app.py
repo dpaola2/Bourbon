@@ -33,5 +33,12 @@ def posts_readdir():
 def post_getattr(post_id):
     return str(Post.stat(post_id))
 
+@app.route('/posts/<post_id>', methods=['READ'])
+def post_read(post_id):
+    p = Post.open(post_id)
+    data = p.read()
+    p.close()
+    return str(data)
+
 app.debug = DEBUG
 app.run(host='0.0.0.0', port=PORT)
