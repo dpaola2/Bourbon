@@ -10,6 +10,7 @@ filesystem.
 import bourbon
 from models import Post as PostModel, Session
 
+
 class Post(bourbon.ModelInterface):
     @staticmethod
     def all():
@@ -45,4 +46,7 @@ class Post(bourbon.ModelInterface):
         
     def getattr(self):
         return bourbon.FILE
+
+root = bourbon.Directory(['posts'])
+posts = bourbon.Directory(Post.all())
 

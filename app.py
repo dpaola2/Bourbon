@@ -10,8 +10,6 @@ app = Flask(__name__)
 
 PORT = int(os.environ.get("PORT", '5000'))
 DEBUG = os.environ.get('DEBUG', True)
-root = Directory(['posts'])
-posts = Directory(Post.all())
 
 @app.route('/', methods=['GETATTR'])
 def index_getattr():

@@ -68,3 +68,4 @@ class Stat(object):
         for key in keys:
             d[key] = getattr(self, key)
         return d
+
