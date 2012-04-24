@@ -29,5 +29,9 @@ def posts_getattr():
 def posts_readdir():
     return str(posts.readdir())
 
+@app.route('/posts/<post_id>', methods=['GETATTR'])
+def post_getattr(post_id):
+    return str(Post.stat(post_id))
+
 app.debug = DEBUG
 app.run(host='0.0.0.0', port=PORT)
