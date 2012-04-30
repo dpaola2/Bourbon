@@ -1,7 +1,7 @@
 DATABASE_NAME = bourbon
 DATABASE_URL=postgresql://admin@localhost/$(DATABASE_NAME)
 ACTIVATE = source bin/activate
-ENV = DATABASE_URL=$(DATABASE_URL)
+ENV = HEROKU_SHARED_POSTGRESQL_IVORY_URL=$(DATABASE_URL)
 MIGRATE_PATH = migrations/manage.py
 all: virtualenv install
 
