@@ -5,6 +5,7 @@ from flask import Flask, flash, render_template
 
 from example import *
 from bourbon import *
+import json
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ DEBUG = os.environ.get('DEBUG', True)
 
 @app.route('/', methods=['GETATTR'])
 def index_getattr():
-    return str(root.stat())
+    return json.dumps(root.stat())
 
 @app.route('/', methods=['READDIR'])
 def index_readdir():
@@ -21,7 +22,7 @@ def index_readdir():
 
 @app.route('/posts', methods=['GETATTR'])
 def posts_getattr():
-    return str(posts.stat())
+    return json.dumps(posts.stat())
 
 @app.route('/posts', methods=['READDIR'])
 def posts_readdir():
@@ -29,7 +30,7 @@ def posts_readdir():
 
 @app.route('/posts/<post_id>', methods=['GETATTR'])
 def post_getattr(post_id):
-    return str(Post.stat(post_id))
+    return json.dumps(Post.stat(post_id))
 
 @app.route('/posts/<post_id>', methods=['READ'])
 def post_read(post_id):
